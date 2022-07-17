@@ -13,7 +13,7 @@ class UserCreationSerializer(serializers.ModelSerializer):
     username = serializers.CharField(max_length=40, allow_blank=True)
     email = serializers.EmailField(max_length=80, allow_blank=False)
     phone_number = PhoneNumberField(null=False, blank=False)
-    password = serializers.CharField(allow_blank=False, write_only=True)
+    password = serializers.CharField(allow_blank=False)
 
     class Meta:
         model = User
