@@ -4,6 +4,7 @@ from django.contrib.auth import get_user_model
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated,IsAdminUser
 
 from . import serializers
 from .models import Order
@@ -13,6 +14,7 @@ User=get_user_model()
 
 class OrderView(APIView):
     serializer_class=serializers.OrderSerializer
+    permission_classes=[IsAuthenticated]
 
     def get(self,request):
         orders=Order.objects.all()
@@ -33,10 +35,12 @@ class OrderView(APIView):
 
 class OrderIdView(APIView):
     serializer_class=serializers.OrderSerializer
+    permission_classes=[IsAuthenticated]
 
     def get(self, request,order_id):
         order=get_object_or_404(Order,pk=order_id)
         serializer=self.serializer_class(instance=order)
+
         return Response(data=serializer.data,status=status.HTTP_200_OK)
 
     def put(self,request,order_id):
@@ -70,6 +74,7 @@ class UpdateOrderStatusView(APIView):
 
 class UserOrdersView(APIView):
     serializer_class=serializers.OrderSerializer
+    permission_classes=[IsAuthenticated,IsAdminUser]
 
     def get(self,request,user_id):
         user=User.objects.get(pk=user_id)
@@ -80,6 +85,7 @@ class UserOrdersView(APIView):
 
 class UserOrderDetailView(APIView):
     serializer_class=serializers.OrderSerializer
+    permission_classes=[IsAuthenticated,IsAdminUser]
 
     def get(self,request,user_id,order_id):
         user=User.objects.get(pk=user_id)
