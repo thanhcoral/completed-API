@@ -78,3 +78,7 @@ INSTALLED_APPS = [
 ]
 
 AUTH_USER_MODEL = 'authentication.User'
+
+REST_FRAMEWORK={
+    "NON_FIELD_ERRORS_KEY":"error",
+}
