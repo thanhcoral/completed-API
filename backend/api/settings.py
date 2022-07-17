@@ -76,3 +76,5 @@ INSTALLED_APPS = [
     'authentication',
     'orders',
 ]
+
+AUTH_USER_MODEL = 'authentication.User'

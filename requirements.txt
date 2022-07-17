@@ -3,5 +3,7 @@ django
 djangorestframework
 djangorestframework-simplejwt
 
+django-phonenumber-field[phonenumbers]
+
 psycopg2
 python-decouple
